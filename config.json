@@ -1,0 +1,4 @@
+{
+    "mongoPath" : "mongodb://localhost:27017/userdatabase",
+    "secret" : "$ecure!?"
+}
