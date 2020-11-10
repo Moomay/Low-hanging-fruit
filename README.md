@@ -6,3 +6,10 @@
 ```
 npm install express ejs body-parser cookie-parser mongoose http https cookie-session
 ```
+#### Config.json
+```
+{
+  "mongoPath" : "mongoDB database path",
+  "secret" : "your secret cookie"
+}
+```
