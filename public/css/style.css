@@ -182,4 +182,19 @@ i{
     .box{
         display: inline;
     }
+    .white{
+        position: absolute;
+        left: 5%;
+        top: 5%;
+        width: 90vw;
+        height: 90vh;
+        border-radius: 50px;
+        padding: 5px;
+    }
+    .leftwarp{
+        display: none;
+    }
+    .mangohead{
+        display: none;
+    }
   }
