@@ -73,6 +73,14 @@ i{
 .imglog:hover{
     transform: scale(1.2,1.2);
 }
+.si{
+    color: gray;
+    margin-top: 2rem;
+    transition: 0.5s;
+}
+.si:hover{
+    color: black;
+}
 
 
 @media screen and (max-width: 1000px) {
