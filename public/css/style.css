@@ -10,7 +10,7 @@ body{
 }
 .box{
     width: 60vw;
-    height: 60vh;
+    height: 70vh;
     border-radius: 50px;
     justify-content: center;
     background-color: white;
@@ -19,17 +19,23 @@ body{
 
     position: absolute;
     left: 20%;
-    top: 20%;
+    top: 15%;
+    box-shadow: 5px 10px 20px #636262;
 
 }
 .conlog{
+    height: 50%;
     position: relative;
     top: 25%;
     text-align: center;
+    box-shadow:  #888888;
+}
+i{
+    opacity: 0.8;
 }
 .inputmail{
     background-color: lightgray;
-    padding: 0.3rem;
+    padding: 0.5rem;
     border-radius: 50px;
     margin-bottom: 1rem;
     margin-top: 2rem;
@@ -37,20 +43,33 @@ body{
 }
 .inputpass{
     background-color: lightgray;
-    padding: 0.3rem;
+    padding: 0.5rem;
     border-radius: 50px;
     margin-bottom: 1rem;
     margin-top: 1rem;
     border-style: none;
 }
+::placeholder {
+    padding: 1rem;
+  }
+
 .bottonsub{
-    background-color: lightgray;
+    background-color: #6dc238;
+    color: white;
     border-radius: 50px;
     border-style: none;
+    height: 2.5rem;
     width: 20%;
-    height:20%;
+    transition: 0.5s;
+}
+.bottonsub:hover{
+    background-color: gray;
 }
 .imglog{
     width: 20vw;
     margin: auto;
+    transition: 1s;
+}
+.imglog:hover{
+    transform: scale(1.2,1.2);
 }
