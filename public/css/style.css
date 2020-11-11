@@ -1,0 +1,56 @@
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+body{
+    font-family: 'Kanit', sans-serif;
+    background-color: rgb(252 211 104);
+    margin: auto;
+}
+.box{
+    width: 60vw;
+    height: 60vh;
+    border-radius: 50px;
+    justify-content: center;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+
+    position: absolute;
+    left: 20%;
+    top: 20%;
+
+}
+.conlog{
+    position: relative;
+    top: 25%;
+    text-align: center;
+}
+.inputmail{
+    background-color: lightgray;
+    padding: 0.3rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    border-style: none;
+}
+.inputpass{
+    background-color: lightgray;
+    padding: 0.3rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-style: none;
+}
+.bottonsub{
+    background-color: lightgray;
+    border-radius: 50px;
+    border-style: none;
+    width: 20%;
+    height:20%;
+}
+.imglog{
+    width: 20vw;
+    margin: auto;
+}
