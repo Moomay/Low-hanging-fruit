@@ -62,6 +62,9 @@ input{
     margin: auto;
     transition: 1s;
 }
+.imglog:hover{
+    transform: scale(1.2,1.2);
+}
 @media screen and (max-width: 1000px) {
     .imglog {
       display: none;
