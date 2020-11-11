@@ -95,7 +95,7 @@ i{
 }
 .mangohead{
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.3;
     top: 30%;
     left: 15%;
 }
@@ -134,7 +134,46 @@ i{
     top: 25%;
     left: 45%;
 }
-
+.l1{
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    color: white;
+    font-weight: bold;
+}
+.l2{
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    color: white;
+    font-weight: bold;
+}
+.l3{
+    position: absolute;
+    top: 60%;
+    left: 20%;
+    color: white;
+    font-weight: bold;
+}
+.material-icons{
+    font-size: 3rem;
+    color: white;
+}
+.icon1{
+    position: absolute;
+    top: 39%;
+    left: 15.5%;
+}
+.icon2{
+    position: absolute;
+    top: 49%;
+    left: 15.5%;
+}
+.icon3{
+    position: absolute;
+    top: 59%;
+    left: 15.5%;
+}
 
 @media screen and (max-width: 1000px) {
     .imglog {
