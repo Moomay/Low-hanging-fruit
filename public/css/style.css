@@ -83,6 +83,52 @@ i{
 .si:hover{
     color: black;
 }
+.white{
+    width: 50vw;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+.mangohead{
+    position: absolute;
+    opacity: 0.5;
+    top: 30%;
+    left: 15%;
+}
+.headtext{
+    position: relative;
+    top: 40%;
+}
+.warp{
+    position: relative;
+    top: 50%;
+}
+.btn{
+    border-radius: 50px;
+    margin-top: 1rem;
+    width: 10rem;
+    border-style: none;
+
+}
+.btn:hover{
+    background-color: gray;
+}
+.btn-secondary{
+    background-color: lightgray;
+}
+.yellow{
+    background-color:rgb(252 211 104) ;
+}
+.mangoicon{
+    width: 10%;
+    position: absolute;
+    top: 25%;
+    left: 45%;
+}
 
 
 @media screen and (max-width: 1000px) {
