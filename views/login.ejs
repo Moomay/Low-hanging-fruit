@@ -17,7 +17,7 @@
             <h3><b>Member Login</b></h3>
             <form action="/auth/signin" method="post">
                  <% if (typeof(message) != "undefined"){%>
-                    <h1><%= message %></h1>
+                    <h4 style="color: tomato;"><%= message %></h4>
                 <% } %>
             <i class="material-icons">email</i>   
             <input type="text" name="email" placeholder="Email" class="inputmail"><br>
