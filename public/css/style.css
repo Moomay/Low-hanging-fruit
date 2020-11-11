@@ -78,6 +78,7 @@ i{
     margin-top: 2rem;
     transition: 0.5s;
     font-size: small;
+    text-align: center;
 }
 .si:hover{
     color: black;
