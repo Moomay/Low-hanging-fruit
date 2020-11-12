@@ -1,6 +1,6 @@
 
 (function connect() {
-    let socket = io.connect("https://app.ogrong.com/");
+    let socket = io.connect("http://localhost:80");
 
     let username = document.querySelector('#username');
     let usernameBtn = document.querySelector('#usernameBtn');
