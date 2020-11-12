@@ -41,6 +41,16 @@ if (isTest == false){
     });
 }
 
+const isNotOnSession = (req, res ,next) =>{
+    jwt.verify(req.cookies['ogrong-sesion'], config.secret, function(err, decoded){
+        if (err){
+            next()
+        }else{
+            return res.redirect('/');
+        }
+    });
+}
+
 app.get('/', function(req, res) {
     res.render('index.ejs');
 });
@@ -50,14 +60,24 @@ const authRouter = require('./routes/auth');
 app.use('/auth', authRouter);
 
 //index rount
-app.get('/register', function(req, res){
+app.get('/register', isNotOnSession, function(req, res){
     res.render('register.ejs', {email: req.query.email, message: req.query.message});
 });
 
-app.get('/login', function(req, res){
+app.get('/login', isNotOnSession, function(req, res){
     res.render('login.ejs', {email: req.query.email, message: req.query.message});
 });
 
+app.get('/logout', isNotOnSession, function(req, res){
+    res.clearCookie('ogrong-sesion');
+    res.redirect('/')
+})
+const userData = require('./routes/userdata');
+app.use('/user', userData);
+
+app.get('/me', function(req, res){
+    res.render('user.ejs');
+})
 //listen on port 80
 var httpServer = http.createServer(app);
 httpServer.listen(80);
