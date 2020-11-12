@@ -4,7 +4,7 @@
 1. setup mongoDB
 2. setup NodeJs
 ```
-npm install express ejs body-parser cookie-parser mongoose http https cookie-session
+npm install express ejs body-parser cookie-parser mongoose http https cookie-session jasonwebtoken crypto
 ```
 #### Config.json
 ```
