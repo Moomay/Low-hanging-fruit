@@ -19,7 +19,9 @@
                     <h4 style="color: tomato;"><%= message %></h4>
                 <% } %>
             <i class="material-icons">email</i>   
-            <input type="text" name="email" placeholder="Email" class="inputmail"><br>
+            <input type="text" name="email" placeholder="Email" class="inputmail" value=<% if (typeof(email) != "undefined"){%>
+                <%= email %>
+                <% } %>><br>
             <i class="material-icons">lock</i>
             <input type="password" name="password" placeholder="Password" class="inputpass"><br><br>
             <input type="submit" value="LOGIN" class="bottonsub">

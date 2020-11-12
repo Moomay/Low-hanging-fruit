@@ -22,7 +22,9 @@
         <i class="material-icons">person</i>  
         <input type="text" name="username" placeholder="Username" class="user"><br>
         <i class="material-icons">email</i>  
-        <input type="text" name="email" placeholder="Email"><br>
+        <input type="text" name="email" placeholder="Email" value=<% if (typeof(email) != "undefined"){%>
+            <%= email %>
+            <% } %>><br>
         <i class="material-icons">lock</i>  
         <input type="password" name="password" id="password" placeholder="Passwords"><br>
         <i class="material-icons">lock_outline</i>  
