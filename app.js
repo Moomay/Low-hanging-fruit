@@ -54,6 +54,10 @@ const isNotOnSession = (req, res ,next) =>{
 app.get('/', function(req, res) {
     res.render('index.ejs');
 });
+
+app.get('/home', function(req, res) {
+    res.render('home.ejs');
+})
 app.use('/public', express.static('public'));
 
 const authRouter = require('./routes/auth');
@@ -70,7 +74,7 @@ app.get('/login', isNotOnSession, function(req, res){
 
 app.get('/logout', isNotOnSession, function(req, res){
     res.clearCookie('ogrong-sesion');
-    res.redirect('/')
+    return res.redirect('/login');
 })
 const userData = require('./routes/userdata');
 app.use('/user', userData);
