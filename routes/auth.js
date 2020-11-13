@@ -4,7 +4,8 @@ const crypto = require('crypto');
 const router = express.Router();
 const User = require('../models/User');
 const config = require('../config.json')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
 router.post('/signup', async (req, res) => {
     const email = req.body.email
     if (req.body.username == '' || req.body.password == '' || req.body.email == ''){
@@ -24,8 +25,12 @@ router.post('/signup', async (req, res) => {
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: passhash
+        //password: req.body.password
+        password: passhash,
+        profile: ""
     });
+    
+
     newUser.save(function(err,data){
         if(err){
             let emailEn = encodeURIComponent(email);
@@ -36,6 +41,7 @@ router.post('/signup', async (req, res) => {
             return res.redirect('/');
         }
     });
+    
 });
 
 router.post('/signin',async (req,res) => {
@@ -44,8 +50,17 @@ router.post('/signin',async (req,res) => {
         return res.render('login', {message: 'โปรดกรอกข้อมูลให้ครบ'})
     }
     let user = await User.findOne({
-        email:req.body.email
+        email:req.body.email,
+        password: req.body.password
     })
+    /*
+    if (user){
+        let token = jwt.sign({username: user.username}, config.secret);
+            res.cookie('ogrong-sesion', token);
+            return res.redirect('/');
+    }else{
+        return res.render('login', {message: 'อีเมล์หรือชื่อผู้ใช้ไม่ถูกต้อง'})
+    }*/
     if (user){
         let passhash = crypto.createHash('md5').update(password).digest('hex')
         const isCorrect = (user.password == passhash);
