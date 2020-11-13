@@ -9,7 +9,10 @@ const userSchema = new Schema({
     type: String,
     unique: true
   },
-  password:  {type: String}
+  password:  {type: String},
+  profile:{
+    type: String
+  }
 })
 const UserModel = mongoose.model('User', userSchema)
 
