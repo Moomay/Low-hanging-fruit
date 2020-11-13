@@ -82,6 +82,13 @@ app.use('/user', userData);
 app.get('/me', function(req, res){
     res.render('user.ejs');
 })
+app.get('/profile/:id', function(req, res){
+    let id = req.params.id;
+    res.sendFile(__dirname +'/profile.html', { "name": id });
+})
+app.get('/profile', function(req, res){
+    res.render('profile.ejs');
+})
 //listen on port 80
 var httpServer = http.createServer(app);
 httpServer.listen(80);
