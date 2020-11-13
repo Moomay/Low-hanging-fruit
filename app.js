@@ -9,8 +9,9 @@ const mongoose = require('mongoose');
 const http = require('http');
 const https = require('https');
 
-const jwt = require('jsonwebtoken')
-const config = require('./config.json')
+const jwt = require('jsonwebtoken');
+const config = require('./config.json');
+const jwt_decode = require('jwt-decode');
 //Define when true when test on localhost
 const isTest = true;
 
@@ -41,12 +42,30 @@ if (isTest == false){
     });
 }
 
-const isNotOnSession = (req, res ,next) =>{
+const isNotOnSession = (req, res, next) =>{
     jwt.verify(req.cookies['ogrong-sesion'], config.secret, function(err, decoded){
         if (err){
             next()
         }else{
             return res.redirect('/');
+        }
+    });
+}
+const isSameUser = (req, res, next) =>{
+    let token = req.cookies['ogrong-sesion'];
+    let decoded = jwt_decode(token);
+    if (req.params.user == decoded.username){
+        return res.redirect('/profile');
+    } else{
+        next();
+    }
+}
+const isLogin = (req, res, next) =>{
+    jwt.verify(req.cookies['ogrong-sesion'], config.secret, function(err, decoded){
+        if (err){
+            return res.redirect('/login');
+        }else{
+            next();
         }
     });
 }
@@ -79,16 +98,14 @@ app.get('/logout', isNotOnSession, function(req, res){
 const userData = require('./routes/userdata');
 app.use('/user', userData);
 
-app.get('/me', function(req, res){
-    res.render('user.ejs');
+app.get('/profile/:user', isSameUser, function(req, res){
+    let username = req.params.user;
+    res.sendFile(__dirname +'/profile.html');
 })
-app.get('/profile/:id', function(req, res){
-    let id = req.params.id;
-    res.sendFile(__dirname +'/profile.html', { "name": id });
+app.get('/profile', isLogin, function(req, res){
+    res.sendFile(__dirname +'/iProfile.html');
 })
-app.get('/profile', function(req, res){
-    res.render('profile.ejs');
-})
+
 //listen on port 80
 var httpServer = http.createServer(app);
 httpServer.listen(80);

@@ -37,5 +37,14 @@ router.post('/profile', isOnSession, function(req, res){
     });
     res.end("suscess")
 });
+router.get('/getprofile', async(req, res) =>{
+    let username = req.query.username;
+    let user = await User.findOne({username: username})
+    if (user){
+        return res.json({profile: user.profile})
+    }else {
+        return res.sendStatus(404)
+    }
+})
 
 module.exports = router;

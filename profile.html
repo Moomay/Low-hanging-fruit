@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='user'></div>
+    <div id='profileT'></div>
+    <script>
+        url = window.location.href
+        username = url.slice(25)
+        user.innerHTML = username
+        let requestURL = '/user/getprofile?username='+username;
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var myJSON = JSON.parse(request.responseText);
+                myFunction(myJSON);
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+        function myFunction(myObj) {
+            profile = myObj.profile;
+            profileT.innerHTML = profile;
+        }
+    </script>
+</body>
+</html>
