@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public/image/mango.png" type="image/png" sizes="50x50">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .nav {
+            display: flex;
+            width: 100%;
+            height: 44px;
+            position: relative;
+            background-color: #1e1f26;
+            flex-direction: row-reverse;
+        }
+        .item {
+            width: 100%;
+            height: 48px;
+            background: pink;
+            margin-bottom: 12px;
+            transition: .2s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .append {
+            animation: append .3s cubic-bezier(.82, .71, .03, .61);
+        }
+
+        .remove {
+            animation: remove .3s cubic-bezier(.82, .71, .03, .61);
+            background: lightgreen;
+        }
+
+        .add {
+            display: block;
+            width: 100%;
+            height: 48px;
+            background: none;
+            border: 0;
+            outline: none;
+            border-radius: 14px;
+            box-shadow: 0 0 13px rgba(0, 0, 0, .2);
+            cursor: pointer;
+        }
+
+        @keyframes append {
+            from {
+                height: 0;
+                margin-bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes remove {
+            to {
+                height: 0;
+                margin-bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+    <div class="nav">
+        <div style="color:aliceblue;">jame</div>
+    </div>
+
+    <div class="input-group">
+        <textarea id="toppic" class="form-control" aria-label="With textarea" rows="2" style="resize: none;"></textarea>
+    </div>
+    <button id="BtnSend" onclick="send()" class="btn btn-primary">send</button>
+    <div id="listToppic" style="display: flex; flex-direction: column-reverse"></div>
+    <script>
+
+        let BtnSend = document.querySelector('#BtnSend');
+        let toppic = document.querySelector('#toppic');
+        var socket = io();
+        //send message
+        //document.cookie = "ogrong-sesion=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWUiLCJpYXQiOjE2MDc2MDg0NzF9.kNqGGv3J43OCSZHen1w8jLwrL5V95X4yUZAE5vmHRp4"
+        function send() {
+            console.log(toppic.value);
+            socket.emit('toppic', { toppic: toppic.value })
+        }
+        socket.on('broadcast', (data) => {
+            console.log(data)
+            let listToppic = document.querySelector('#listToppic');
+            let listItem = document.createElement('p')
+            listItem.className = "item append"
+            listItem.textContent = data.bToppic;
+
+            listToppic.appendChild(listItem);
+        })
+
+    </script>
+</body>
+
+</html>

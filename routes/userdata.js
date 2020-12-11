@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
 const config = require('../config.json');
 const User = require('../models/User');
-
+const Profile = require('../models/Profile')
 const isOnSession = (req, res ,next) =>{
     jwt.verify(req.cookies['ogrong-sesion'], config.secret, function(err, decoded){
         if (err){
@@ -35,10 +35,12 @@ router.post('/profile', isOnSession, function(req, res){
     User.updateOne({"username": decoded.username}, {$set :{"profile": profile}}, (err, data)=>{
         if (err) console.log(err)
     });
+    res.redirect('/profile')
     res.end("suscess")
 });
 router.get('/getprofile', async(req, res) =>{
     let username = req.query.username;
+    console.log(username);
     let user = await User.findOne({username: username})
     if (user){
         return res.json({profile: user.profile})
@@ -46,5 +48,4 @@ router.get('/getprofile', async(req, res) =>{
         return res.sendStatus(404)
     }
 })
-
 module.exports = router;

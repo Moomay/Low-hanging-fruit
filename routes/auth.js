@@ -51,7 +51,7 @@ router.post('/signin',async (req,res) => {
     }
     let user = await User.findOne({
         email:req.body.email,
-        password: req.body.password
+        //password: req.body.password
     })
     /*
     if (user){
@@ -61,7 +61,7 @@ router.post('/signin',async (req,res) => {
     }else{
         return res.render('login', {message: 'อีเมล์หรือชื่อผู้ใช้ไม่ถูกต้อง'})
     }*/
-    if (user){
+    if (user) {
         let passhash = crypto.createHash('md5').update(password).digest('hex')
         const isCorrect = (user.password == passhash);
         if (isCorrect) {

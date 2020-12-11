@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="public/image/mango.png" type="image/png" sizes="50x50">
+    <title>Gobal Chat</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .nav {
+            display: flex;
+            width: 100%;
+            height: 44px;
+            position: relative;
+            background-color: #1e1f26;
+            flex-direction: row-reverse;
+        }
+
+        .item {
+            display: flex;
+            width: 100%;
+            height: 48px;
+            background: #fcd369;
+            align-items: center;
+            /*margin-bottom: 12px;*/
+            transition: .2s;
+            /*cursor: pointer;*/
+            border-radius: 3px;
+            margin-top: 0.5em;
+            padding-left: 1.2em;
+        }
+
+        .append {
+            animation: append .3s cubic-bezier(.82, .71, .03, .61);
+        }
+
+        .remove {
+            animation: remove .3s cubic-bezier(.82, .71, .03, .61);
+            background: lightgreen;
+        }
+
+        .add {
+            display: block;
+            width: 100%;
+            height: 48px;
+            background: none;
+            border: 0;
+            outline: none;
+            border-radius: 14px;
+            box-shadow: 0 0 13px rgba(0, 0, 0, .2);
+            /*cursor: pointer;*/
+        }
+
+        .con {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        .msg {
+            font-size: 1.2em;
+        }
+
+        .cen {
+            justify-content: center;
+            align-items: center;
+        }
+
+        #toppic {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            width: 50%;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .wid100 {
+            width: 100%;
+        }
+
+        .wid50 {
+            width: 50%
+        }
+
+        .reverse {
+            flex-direction: column-reverse;
+        }
+
+        @keyframes append {
+            from {
+                height: 0;
+                margin-bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes remove {
+            to {
+                height: 0;
+                margin-bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+    <div class="nav">
+        <div id="user" style="color:aliceblue;"></div>
+    </div>
+    <div class="con">
+        <div class="col cen">
+            <textarea id="toppic" class="msg" aria-label="With textarea" rows="2" style="resize: none;"></textarea>
+        </div>
+        <div class="col cen">
+            <button id="BtnSend" onclick="send()" class="btn btn-primary">send</button>
+        </div>
+        <div class="col cen reverse" id="listToppic">
+            <!--
+            <div class="item append wid50">
+                <div onclick="console.log('5555')">HACKER</div>
+                <div> : 5555</div>
+            </div>
+            <div class="item append wid50">asdasd</div>
+-->
+        </div>
+    </div>
+
+    <script>
+
+        let BtnSend = document.querySelector('#BtnSend');
+        let toppic = document.querySelector('#toppic');
+        var socket = io.connect("https://app.ogrong.com:443");
+        //send message
+        //document.cookie = "ogrong-sesion=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbWUiLCJpYXQiOjE2MDc2MDg0NzF9.kNqGGv3J43OCSZHen1w8jLwrL5V95X4yUZAE5vmHRp4"
+        function send() {
+            console.log(toppic.value);
+            //new vulnerable 555
+            let username = document.getElementById('user').innerText
+            socket.emit('toppic', {
+                username: username,
+                toppic: toppic.value
+            })
+            toppic.value = "";
+        }
+        socket.on('broadcast', (data) => {
+            console.log(data)
+            let listToppic = document.querySelector('#listToppic');
+            let listItem = document.createElement('div');
+            let divUser = document.createElement('div');
+            let divToppic = document.createElement('div');
+            listItem.className = "item append wid50";
+            divUser.addEventListener("click", function() {document.location = '/profile/'+data.username});
+            divUser.style.cursor = "pointer";
+            divUser.textContent = data.username+" ";
+            divToppic.textContent = ": " + data.bToppic;
+            //listItem.textContent = data.username + ": " + data.bToppic;
+            listItem.appendChild(divUser);
+            listItem.appendChild(divToppic);
+            listToppic.appendChild(listItem);
+        })
+        let requestURL = '/auth/verify';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var myJSON = request.responseText;
+                myFunction(myJSON);
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+        function myFunction(myObj) {
+            console.log(myObj)
+            let user = document.getElementById("user")
+            user.innerText = myObj;
+        }
+
+    </script>
+</body>
+
+</html>

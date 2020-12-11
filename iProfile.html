@@ -1,13 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>profile</title>
+    <style>
+        body {
+            background-color: #fcd369;
+            margin: 0;
+        }
+
+        .headPro {
+
+            font-size: 30pt;
+            font-weight: bold;
+        }
+
+        .con {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .col {
+            display: flex;
+            flex-direction: row;
+            padding-top: 2.5%;
+        }
+
+        .cen {
+            justify-content: center;
+        }
+
+        .black {
+            color: #000000
+        }
+
+        .white {
+            color: #fff;
+        }
+
+        .status {
+            background-color: #e6e6e6;
+            height: 200pt;
+            width: 400pt;
+            color: #000
+        }
+
+        textarea {
+            resize: none;
+            height: 200pt;
+            width: 400pt;
+        }
+    </style>
 </head>
+
 <body>
-    <div id='user'></div>
-    <div id='profileT'></div>
+
+    <div class="con">
+        <div class="col cen">
+            <div class="headPro white">MY PROFILE</div>
+        </div>
+        <div class="col cen">
+            <div id="user" class="headPro black"></div>
+        </div>
+        <div class="col cen">
+            <div id="profileT" class="status"></div>
+        </div>
+        <div class="col cen">
+            <form id="formUp" action="/user/profile" method="post">
+                <h1 class="white">Update Status</h1>
+                <textarea id="status" row="4" type="text" name="profile"></textarea><br>
+                <input type="submit" value="send" style="visibility: hidden;">
+            </form>
+        </div>
+    </div>
+
     <script>
         var username = ""
         url = window.location.href
@@ -24,8 +93,9 @@
         function myFunction(myObj) {
             console.log(myObj)
             username += myObj.username;
+            let user = document.getElementById("user")
             user.innerHTML = username;
-            let requestURL2 = '/user/getprofile?username='+username;
+            let requestURL2 = '/user/getprofile?username=' + username;
             let request2 = new XMLHttpRequest();
             request2.onreadystatechange = function () {
                 if (request2.readyState == 4 && request2.status == 200) {
@@ -37,10 +107,20 @@
             request2.send();
             function myFunction2(myObj) {
                 profile = myObj.profile;
+                let profileT = document.getElementById("profileT")
                 profileT.innerHTML = profile;
             }
         }
+        function submitOnEnter(e) {
+            const keyCode = e.which || e.keyCode;
+            if (keyCode === 13 && !e.shiftKey) {
+                document.getElementById("formUp").submit()
+                e.preventDefault(); // Prevents the addition of a new line in the text field (not needed in a lot of cases)
+            }
+        }
 
+        document.getElementById("status").addEventListener('keydown', submitOnEnter);
     </script>
 </body>
+
 </html>
